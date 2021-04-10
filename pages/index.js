@@ -3,17 +3,24 @@ import { useState } from 'react'
 
 export default function Home() {
 
-  const [question, setQuestion] = useState('Your Question Will Go Here!')
-  const [reply, setReply] = useState("Ask Me Anything!")
-
-  function questionAskedHandler(event){
+  const [cookieStand, setCookieStand] = useState('')
+  function formHandler(event){
     event.preventDefault();
-    // alert(event.target.question.value)
-    const randomReply = Math.random() > .5 ? "Yes" : "No";
+    const formData = new FormData(event.target)
+    const cookieStand = JSON.stringify(Object.fromEntries(formData))
+    setCookieStand(cookieStand);
 
-    setReply(randomReply)
-    setQuestion(event.target.question.value)
   }
+  // const [reply, setReply] = useState("Ask Me Anything!")
+
+  // function questionAskedHandler(event){
+  //   event.preventDefault();
+  //   // alert(event.target.question.value)
+  //   const randomReply = Math.random() > .5 ? "Yes" : "No";
+
+  //   setReply(randomReply)
+  //   setQuestion(event.target.question.value)
+  
 
   return (
     <div className="">
@@ -23,33 +30,31 @@ export default function Home() {
       </Head>
 
       <Header title="Cookie Stand Admin"/>
-      {/* <header className="flex p-4 bg-gray-500 text-gray-50">
-        <h1 className="text-4xl border border-color-black">Magic 8 Ball</h1>
-      </header> */}
 
       <main className="w-2/3 m-auto">
-         <form className="mt-4 grid gap-1 bg-green-500 grid-cols-8 mb-4">
-          <legend className="col-start-4 col-span-3 text-2xl m-2">Create Cookie Stand</legend>
-          <label className="row-start-2 col-start-1 col-span-1 ml-8" for='location'>Location</label>
-          <input className="row-start-2 col-start-2 col-span-7 text-sm mr-4" name='location'></input>
+         <form onSubmit={formHandler} name="formData" className="grid grid-cols-8 gap-1 mt-4 mb-4 bg-green-500">
+          <legend className="col-span-3 col-start-4 m-2 text-2xl">Create Cookie Stand</legend>
+          <label className="col-span-1 col-start-1 row-start-2 ml-6" for='location'>Location</label>
+          <input className="col-span-7 col-start-2 row-start-2 mr-4 text-sm" name='location'></input>
 
-          <label className="row-start-3 col-start-1 col-span-2 text-sm text-center" for='min_cust'>Minimum Customers per Hour</label>
-          <input className="row-start-4 col-start-1 col-span-2 text-sm mr-2 ml-2 mb-4" name='min_cust'></input>
+          <label className="col-span-2 col-start-1 row-start-3 text-sm text-center" for='min_cust'>Minimum Customers per Hour</label>
+          <input className="col-span-2 col-start-1 row-start-4 mb-4 ml-2 mr-2 text-sm" name='min_Customers'></input>
 
-          <label className="row-start-3 col-start-3 col-span-2 text-sm text-center" for='max_cust'>Maximum Customers per Hour</label>
-          <input className="row-start-4 col-start-3 col-span-2 text-sm mr-2 ml-2 mb-4" name='max_cust'></input>
+          <label className="col-span-2 col-start-3 row-start-3 text-sm text-center" for='max_cust'>Maximum Customers per Hour</label>
+          <input className="col-span-2 col-start-3 row-start-4 mb-4 ml-2 mr-2 text-sm" name='max_Customers'></input>
 
-          <label className="row-start-3 col-start-5 col-span-2 text-sm text-center" for='avg_per'>Average Cookies per Sale</label>
-          <input className="row-start-4 col-start-5 col-span-2 text-sm mr-2 ml-2 mb-4" name='avg_per'></input>
+          <label className="col-span-2 col-start-5 row-start-3 text-sm text-center" for='avg_per'>Average Cookies per Sale</label>
+          <input className="col-span-2 col-start-5 row-start-4 mb-4 ml-2 mr-2 text-sm" name='avg_Cookies'></input>
 
-          <button className="row-start-3 col-start-7 col-span-2 row-span-2 bg-green-700 mr-4 ml-2 mb-2 mt-2" >Create</button>
+          <button className="col-span-2 col-start-7 row-span-2 row-start-3 mt-2 mb-2 ml-2 mr-4 bg-green-700" >Create</button>
         </form>
+        <p className="p-3 mt-3 mb-3 text-center">{cookieStand}</p>
 
 
       </main>
 
-      <footer className="h-30 p-5 bg-green-500">
-        <p className="pb-5 float-left">@2021</p>
+      <footer className="p-5 bg-green-500 h-30">
+        <p className="float-left pb-5">@2021</p>
       </footer>
     </div>
   )
