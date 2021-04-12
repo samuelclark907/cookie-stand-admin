@@ -1,5 +1,8 @@
+import { data } from 'autoprefixer'
 import Head from 'next/head'
 import { useState } from 'react'
+
+const hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
 
 export default function Home() {
 
@@ -11,15 +14,6 @@ export default function Home() {
     setCookieStand(cookieStand);
 
   }
-  // const [reply, setReply] = useState("Ask Me Anything!")
-
-  // function questionAskedHandler(event){
-  //   event.preventDefault();
-  //   // alert(event.target.question.value)
-  //   const randomReply = Math.random() > .5 ? "Yes" : "No";
-
-  //   setReply(randomReply)
-  //   setQuestion(event.target.question.value)
   
 
   return (
@@ -50,11 +44,13 @@ export default function Home() {
         </form>
         <p className="p-3 mt-3 mb-3 text-center">{cookieStand}</p>
 
+        <ResponseTable />
+
 
       </main>
 
-      <footer className="p-5 bg-green-500 h-30">
-        <p className="float-left pb-5">@2021</p>
+      <footer className="p-2 bg-green-500 h-30">
+        <p className="p-1">Locations World Wide</p>
       </footer>
     </div>
   )
@@ -64,6 +60,31 @@ export default function Home() {
       <header className="flex p-4 bg-green-400">
         <h1 className="text-4xl border border-color-black">{props.title}</h1>
       </header>
+    )
+  }
+
+  function ResponseTable(props){
+    return(
+      <table className="w-1/2 mx-auto my-4">
+        <thead>
+          <tr>
+            <th className="border border-gray-700">No</th>
+            <th className="border border-gray-700">Question</th>
+            <th className="border border-gray-700">Response</th>
+          </tr>
+        </thead>
+        <tbody>
+          {props.hours.map(item =>(
+            <tr className="odd:bg-red-500">
+              <td className="pl-2 border border-gray-700">{item.id}</td>
+              <td className="pl-2 border border-gray-700">{item.question}</td>
+              <td className="pl-2 border border-gray-700">{item.reply}</td>
+            </tr>
+          ))}
+
+        </tbody>
+        
+      </table>
     )
   }
 }
